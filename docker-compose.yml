@@ -1,0 +1,17 @@
+services:
+  libreria-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: libreria_doncesar_api
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Server=${DB_SERVER:-host.docker.internal},${DB_PORT:-1433};Database=${DB_NAME:-SISTEMALIBRERIADB_NORM};User Id=${DB_USER:-sa};Password=Cambiar_Esta_Clave_123!;TrustServerCertificate=True;
+      - JwtSettings__SecretKey=6F9G8UTckv2GF1Wj1L1SJDlGhpja0fEZkhPY84vr
+      - JwtSettings__Issuer=https://api.LibreriaDonCesar.com
+      - JwtSettings__Audience=https://LibreriaDonCesar.com
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
