@@ -1,17 +1,18 @@
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 WORKDIR /src
 
-COPY ["LibreriaDonCesar.APIVI/LibreriaDonCesar.API/LibreriaDonCesar.API.csproj", "LibreriaDonCesar.APIVI/LibreriaDonCesar.API/"]
-COPY ["LibreriaDonCesar.APIVI/LibreriaDonCesar.API.Business/LibreriaDonCesar.API.Business.csproj", "LibreriaDonCesar.APIVI/LibreriaDonCesar.API.Business/"]
-COPY ["LibreriaDonCesar.APIVI/LibreriaDonCesar.API.Core/LibreriaDonCesar.API.Core.csproj", "LibreriaDonCesar.APIVI/LibreriaDonCesar.API.Core/"]
-COPY ["LibreriaDonCesar.APIVI/LibreriaDonCesar.API.DataAccess/LibreriaDonCesar.API.DataAccess.csproj", "LibreriaDonCesar.APIVI/LibreriaDonCesar.API.DataAccess/"]
+COPY ["LibreriaDonCesar.API/LibreriaDonCesar.API.csproj", "LibreriaDonCesar.API/"]
+COPY ["LibreriaDonCesar.Business/LibreriaDonCesar.Business.csproj", "LibreriaDonCesar.Business/"]
+COPY ["LibreríaDonCesar.Core/LibreriaDonCesar.Core.csproj", "LibreríaDonCesar.Core/"]
+COPY ["LibreriaDonCesar.DataAccess/LibreriaDonCesar.DataAccess.csproj", "LibreriaDonCesar.DataAccess/"]
 
-RUN dotnet restore "LibreriaDonCesar.APIVI/LibreriaDonCesar.API/LibreriaDonCesar.API.csproj"
+RUN dotnet restore "LibreriaDonCesar.API/LibreriaDonCesar.API.csproj"
 
 COPY . .
 
-WORKDIR "/src/LibreriaDonCesar.APIVI/LibreriaDonCesar.API"
+WORKDIR "/src/LibreriaDonCesar.API"
 
 RUN dotnet publish "LibreriaDonCesar.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
